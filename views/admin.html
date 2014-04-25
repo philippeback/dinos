@@ -14,8 +14,8 @@
                 <section>
                     <h1>1</h1>
                     <h3>oh</h3>
-                </section>
 
+                </section>
 
                 <section>
                     <h1>2</h1>
@@ -32,10 +32,10 @@
         <script src="components/reveal.js/js/reveal.min.js"></script>
         <script type="text/javascript">
             (function(){
-              var host = 'http://localhost:3000'
+              var host = 'http://localhost:40001'
                 , socket = io.connect(host);
               Reveal.initialize({
-                history: true
+                history: true               
               });
 
             notifyServer = function(event){
@@ -59,6 +59,15 @@
               //  console.log('slidechanged');
               Reveal.slide(data.indexh, data.indexv, data.indexf);
             });
+
+            Reveal.addEventListener( 'slidechanged', function( event ) {
+              // event.previousSlide, event.currentSlide, event.indexh, event.indexv
+              var notes = event.currentSlide.querySelector(".notes");
+              if(notes) {
+                console.info(notes.innerHTML.replace(/\n\s+/g,'\n'));
+              }
+            } );
+
           })();
 
         </script>
