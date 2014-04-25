@@ -1,0 +1,49 @@
+<!-- views/index.html -->
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Revealer - Reveal.js multiplexer</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <link rel="stylesheet" href="components/reveal.js/css/reveal.min.css">
+        <link rel="stylesheet" href="components/reveal.js/css/theme/default.css" id="theme">
+    </head>
+    <body>
+        <div class="reveal">
+             <div class="slides">
+                <section>
+                    <h1>1</h1>
+                    <h3>oh</h3>
+                </section>
+
+
+                <section>
+                    <h1>2</h1>
+                    <h3>hai</h3>
+                </section>
+
+                <section>
+                    <h1>3</h1>
+                    <h3>there</h3>
+                </section>
+            </div>
+        </div>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="components/reveal.js/js/reveal.min.js"></script>
+        <script type="text/javascript">
+           (function(){
+               var host = 'http://localhost:3000'
+                , socket = io.connect(host);
+              Reveal.initialize({
+                history: true
+              });
+
+            socket.on('slidechanged', function (data) {
+            //console.log('received slidechanged');
+              Reveal.slide(data.indexh, data.indexv, data.indexf);
+            });
+          })();
+
+        </script>
+    </body>
+</html>
